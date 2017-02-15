@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Super Sprinter 3000</title>
+
+    <style>
+        table {
+            border: dotted;
+            width: 100%;
+
+        }
+        td, th {
+            height: 50px;
+            border: hidden;
+            text-align: center;
+        }
+
+        .button {
+    background: url("http://i.imgur.com/SQBYaUF.png") no-repeat;;
+    border: fuchsia;
+    color: darkblue;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 8px;
+    cursor: wait;
+}
+    </style>
+
+</head>
+
+<body background=" http://hd-wall-papers.com/images/wallpapers/background-nice/background-nice-7.png">
+
+    <h1>SUPER SPRINTER 3000</h1>
+
+    <form action="{{ url_for('display_add_story_form') }}" method="GET">
+        <input type="submit" class="button" value="New Story"/>
+
+    </form>
+    <br>
+    <table>
+        <tr>
+            <th>Story ID</th>
+            <th>Story title</th>
+            <th>User story</th>
+            <th>Acceptance criteria</th>
+            <th>Business value</th>
+            <th>Estimation</th>
+            <th>Status</th>
+
+        </tr>
+
+        {% for story in stories %}
+
+        <tr>
+            <td>{{ story.id }}</td>
+            <td>{{ story.story_title }}</td>
+            <td>{{ story.user_story }}</td>
+            <td>{{ story.acceptance_criteria }}</td>
+            <td>{{ story.business_value }}</td>
+            <td>{{ story.estimation }}</td>
+            <td>{{ story.status }}</td>
+            <td>
+                <a href="{{ url_for('edit_story', story_id=story.id) }}">
+                    <button type="submit">Update</button>
+                </a>
+            </td>
+            <td>
+                <a href="{{ url_for('delete_story', story_id=story.id) }}">
+                    <button type="submit">Delete</button>
+                </a>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</body>
+
+</html>
